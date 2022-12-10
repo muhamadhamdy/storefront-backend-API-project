@@ -8,18 +8,26 @@ import { order, Orders, OrderWithPorducts } from '../models/orderModel';
 const order = new Orders();
 
 const index = async (req: Request, res: Response) => {
-    const userid = getUserIDFromToken(req);
-    if (userid) {
-        const orders = await order.index(userid);
-        res.json(orders);
+    try {
+        const userid = getUserIDFromToken(req);
+        if (userid) {
+            const orders = await order.index(userid);
+            res.json(orders);
+        }
+    } catch (err) {
+        res.json(err);
     }
 };
 
 const show = async (req: Request, res: Response) => {
-    const userid = getUserIDFromToken(req);
-    if (userid) {
-        const myOrder = await order.show(parseInt(req.params.id), userid);
-        res.json(myOrder);
+    try {
+        const userid = getUserIDFromToken(req);
+        if (userid) {
+            const myOrder = await order.show(parseInt(req.params.id), userid);
+            res.json(myOrder);
+        }
+    } catch (err) {
+        res.json(err);
     }
 };
 
@@ -29,7 +37,7 @@ const create = async (req: Request, res: Response) => {
         const newOrder: OrderWithPorducts = {
             id: 0,
             orderdate: new Date(),
-            userid: userid?userid:0,
+            userid: userid ? userid : 0,
             status: req.body.status,
             products: req.body.products
         };
@@ -42,10 +50,14 @@ const create = async (req: Request, res: Response) => {
 };
 
 const deleted = async (req: Request, res: Response) => {
-    const userid = getUserIDFromToken(req);
-    if (userid) {
-        const deleted = await order.delete(parseInt(req.body.id), userid);
-        res.json(deleted);
+    try {
+        const userid = getUserIDFromToken(req);
+        if (userid) {
+            const deleted = await order.delete(parseInt(req.body.id), userid);
+            res.json(deleted);
+        }
+    } catch (err) {
+        res.json(err);
     }
 };
 
@@ -57,7 +69,7 @@ const edit = async (req: Request, res: Response) => {
                 id: parseInt(req.body.id),
                 userid: parseInt(req.body.userid),
                 orderdate: new Date(),
-                status: req.body.status,
+                status: req.body.status
             };
             const edited = await order.edit(editOrder, userid);
             res.json(edited);
@@ -69,18 +81,26 @@ const edit = async (req: Request, res: Response) => {
 };
 
 const orderStatusActive = async (req: Request, res: Response) => {
-    const userid = getUserIDFromToken(req);
-    if (userid) {
-        const orders = await order.orderStatus('active', userid);
-        res.json(orders);
+    try {
+        const userid = getUserIDFromToken(req);
+        if (userid) {
+            const orders = await order.orderStatus('active', userid);
+            res.json(orders);
+        }
+    } catch (err) {
+        res.json(err);
     }
 };
 
 const orderStatusComplete = async (req: Request, res: Response) => {
-    const userid = getUserIDFromToken(req);
-    if (userid) {
-        const orders = await order.orderStatus('complete', userid);
-        res.json(orders);
+    try {
+        const userid = getUserIDFromToken(req);
+        if (userid) {
+            const orders = await order.orderStatus('complete', userid);
+            res.json(orders);
+        }
+    } catch (err) {
+        res.json(err);
     }
 };
 const ordersRoutes = (app: express.Application) => {

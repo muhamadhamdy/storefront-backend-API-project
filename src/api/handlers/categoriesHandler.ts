@@ -5,13 +5,21 @@ import { category, Categories } from '../models/categoryModel';
 const Category = new Categories();
 
 const index = async (_req: Request, res: Response) => {
-    const categories = await Category.index();
-    res.json(categories);
+    try {
+        const categories = await Category.index();
+        res.json(categories);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const show = async (req: Request, res: Response) => {
-    const category = await Category.show(parseInt(req.params.id));
-    res.json(category);
+    try {
+        const category = await Category.show(parseInt(req.params.id));
+        res.json(category);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const create = async (req: Request, res: Response) => {
@@ -29,8 +37,12 @@ const create = async (req: Request, res: Response) => {
 };
 
 const deleted = async (req: Request, res: Response) => {
-    const deleted = await Category.delete(parseInt(req.body.id));
-    res.json(deleted);
+    try {
+        const deleted = await Category.delete(parseInt(req.body.id));
+        res.json(deleted);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const edit = async (req: Request, res: Response) => {
@@ -48,10 +60,14 @@ const edit = async (req: Request, res: Response) => {
 };
 
 const categoryProducts = async (req: Request, res: Response) => {
-    const category = await Category.showCategoryProducts(
-        parseInt(req.params.id)
-    );
-    res.json(category);
+    try {
+        const category = await Category.showCategoryProducts(
+            parseInt(req.params.id)
+        );
+        res.json(category);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const categoriesRoutes = (app: express.Application) => {

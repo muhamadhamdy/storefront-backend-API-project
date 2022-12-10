@@ -5,13 +5,21 @@ import { product, Products } from '../models/productModel';
 const Product = new Products();
 
 const index = async (_req: Request, res: Response) => {
-    const products = await Product.index();
-    res.json(products);
+    try {
+        const products = await Product.index();
+        res.json(products);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const show = async (req: Request, res: Response) => {
-    const product = await Product.show(parseInt(req.params.id));
-    res.json(product);
+    try {
+        const product = await Product.show(parseInt(req.params.id));
+        res.json(product);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const create = async (req: Request, res: Response) => {
@@ -31,8 +39,12 @@ const create = async (req: Request, res: Response) => {
 };
 
 const deleted = async (req: Request, res: Response) => {
-    const deleted = await Product.delete(parseInt(req.body.id));
-    res.json(deleted);
+    try {
+        const deleted = await Product.delete(parseInt(req.body.id));
+        res.json(deleted);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const edit = async (req: Request, res: Response) => {
@@ -52,8 +64,12 @@ const edit = async (req: Request, res: Response) => {
 };
 
 const top5_Products = async (req: Request, res: Response) => {
-    const products = await Product.top5Products();
-    res.json(products);
+    try {
+        const products = await Product.top5Products();
+        res.json(products);
+    } catch (err) {
+        res.json(err);
+    }
 };
 
 const productsRoutes = (app: express.Application) => {

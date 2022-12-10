@@ -1,0 +1,7 @@
+
+CREATE TABLE orders(
+id SERIAL PRIMARY KEY,
+orderdate TIMESTAMP NOT NULL DEFAULT NOW(),
+userid INTEGER REFERENCES users(id) NOT NULL,
+orderstatus STATUS NOT NULL DEFAULT 'active'
+);
