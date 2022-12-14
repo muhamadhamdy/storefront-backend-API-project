@@ -110,7 +110,6 @@ class Users {
                 username.toLowerCase()
             ]);
             conn.release;
-            console.log(signInResult.rows[0], '\n', ext, '\n', bcrypt_1.default.compareSync(password + ext, signInResult.rows[0].password));
             if (signInResult.rows.length) {
                 const user = signInResult.rows[0];
                 if (bcrypt_1.default.compareSync(password + ext, user.password)) {

@@ -4,17 +4,27 @@ const authenticateUser_1 = require("../../components/authenticateUser");
 const orderModel_1 = require("../models/orderModel");
 const order = new orderModel_1.Orders();
 const index = async (req, res) => {
-    const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
-    if (userid) {
-        const orders = await order.index(userid);
-        res.json(orders);
+    try {
+        const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
+        if (userid) {
+            const orders = await order.index(userid);
+            res.json(orders);
+        }
+    }
+    catch (err) {
+        res.json(err);
     }
 };
 const show = async (req, res) => {
-    const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
-    if (userid) {
-        const myOrder = await order.show(parseInt(req.params.id), userid);
-        res.json(myOrder);
+    try {
+        const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
+        if (userid) {
+            const myOrder = await order.show(parseInt(req.params.id), userid);
+            res.json(myOrder);
+        }
+    }
+    catch (err) {
+        res.json(err);
     }
 };
 const create = async (req, res) => {
@@ -36,10 +46,15 @@ const create = async (req, res) => {
     }
 };
 const deleted = async (req, res) => {
-    const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
-    if (userid) {
-        const deleted = await order.delete(parseInt(req.body.id), userid);
-        res.json(deleted);
+    try {
+        const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
+        if (userid) {
+            const deleted = await order.delete(parseInt(req.body.id), userid);
+            res.json(deleted);
+        }
+    }
+    catch (err) {
+        res.json(err);
     }
 };
 const edit = async (req, res) => {
@@ -50,7 +65,7 @@ const edit = async (req, res) => {
                 id: parseInt(req.body.id),
                 userid: parseInt(req.body.userid),
                 orderdate: new Date(),
-                status: req.body.status,
+                status: req.body.status
             };
             const edited = await order.edit(editOrder, userid);
             res.json(edited);
@@ -62,17 +77,27 @@ const edit = async (req, res) => {
     }
 };
 const orderStatusActive = async (req, res) => {
-    const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
-    if (userid) {
-        const orders = await order.orderStatus('active', userid);
-        res.json(orders);
+    try {
+        const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
+        if (userid) {
+            const orders = await order.orderStatus('active', userid);
+            res.json(orders);
+        }
+    }
+    catch (err) {
+        res.json(err);
     }
 };
 const orderStatusComplete = async (req, res) => {
-    const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
-    if (userid) {
-        const orders = await order.orderStatus('complete', userid);
-        res.json(orders);
+    try {
+        const userid = (0, authenticateUser_1.getUserIDFromToken)(req);
+        if (userid) {
+            const orders = await order.orderStatus('complete', userid);
+            res.json(orders);
+        }
+    }
+    catch (err) {
+        res.json(err);
     }
 };
 const ordersRoutes = (app) => {

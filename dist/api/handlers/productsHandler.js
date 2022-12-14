@@ -4,12 +4,22 @@ const authenticateUser_1 = require("../../components/authenticateUser");
 const productModel_1 = require("../models/productModel");
 const Product = new productModel_1.Products();
 const index = async (_req, res) => {
-    const products = await Product.index();
-    res.json(products);
+    try {
+        const products = await Product.index();
+        res.json(products);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const show = async (req, res) => {
-    const product = await Product.show(parseInt(req.params.id));
-    res.json(product);
+    try {
+        const product = await Product.show(parseInt(req.params.id));
+        res.json(product);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const create = async (req, res) => {
     try {
@@ -28,8 +38,13 @@ const create = async (req, res) => {
     }
 };
 const deleted = async (req, res) => {
-    const deleted = await Product.delete(parseInt(req.body.id));
-    res.json(deleted);
+    try {
+        const deleted = await Product.delete(parseInt(req.body.id));
+        res.json(deleted);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const edit = async (req, res) => {
     try {
@@ -48,8 +63,13 @@ const edit = async (req, res) => {
     }
 };
 const top5_Products = async (req, res) => {
-    const products = await Product.top5Products();
-    res.json(products);
+    try {
+        const products = await Product.top5Products();
+        res.json(products);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const productsRoutes = (app) => {
     app.get('/products/top5', top5_Products);

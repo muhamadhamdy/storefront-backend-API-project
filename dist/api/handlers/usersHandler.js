@@ -4,12 +4,22 @@ const authenticateUser_1 = require("../../components/authenticateUser");
 const userModel_1 = require("../models/userModel");
 const User = new userModel_1.Users();
 const index = async (_req, res) => {
-    const users = await User.index();
-    res.json(users);
+    try {
+        const users = await User.index();
+        res.json(users);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const show = async (req, res) => {
-    const users = await User.show(parseInt(req.params.id));
-    res.json(users);
+    try {
+        const users = await User.show(parseInt(req.params.id));
+        res.json(users);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const create = async (req, res) => {
     try {
@@ -21,14 +31,6 @@ const create = async (req, res) => {
             password: req.body.password
         };
         const rtnUser = await User.create(newUser);
-        // const result= {
-        //     id: rtnUser.id,
-        //     username: rtnUser.username,
-        //     firstname: rtnUser.firstname,
-        //     lastname: rtnUser.lastname,
-        //     password: rtnUser.password,
-        //     authenticationToken: createJWT(rtnUser)
-        //};
         res.json(rtnUser);
     }
     catch (err) {
@@ -37,8 +39,13 @@ const create = async (req, res) => {
     }
 };
 const deleted = async (req, res) => {
-    const deleted = await User.delete(parseInt(req.body.id));
-    res.json(deleted);
+    try {
+        const deleted = await User.delete(parseInt(req.body.id));
+        res.json(deleted);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const edit = async (req, res) => {
     try {

@@ -4,12 +4,22 @@ const authenticateUser_1 = require("../../components/authenticateUser");
 const categoryModel_1 = require("../models/categoryModel");
 const Category = new categoryModel_1.Categories();
 const index = async (_req, res) => {
-    const categories = await Category.index();
-    res.json(categories);
+    try {
+        const categories = await Category.index();
+        res.json(categories);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const show = async (req, res) => {
-    const category = await Category.show(parseInt(req.params.id));
-    res.json(category);
+    try {
+        const category = await Category.show(parseInt(req.params.id));
+        res.json(category);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const create = async (req, res) => {
     try {
@@ -26,8 +36,13 @@ const create = async (req, res) => {
     }
 };
 const deleted = async (req, res) => {
-    const deleted = await Category.delete(parseInt(req.body.id));
-    res.json(deleted);
+    try {
+        const deleted = await Category.delete(parseInt(req.body.id));
+        res.json(deleted);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const edit = async (req, res) => {
     try {
@@ -44,8 +59,13 @@ const edit = async (req, res) => {
     }
 };
 const categoryProducts = async (req, res) => {
-    const category = await Category.showCategoryProducts(parseInt(req.params.id));
-    res.json(category);
+    try {
+        const category = await Category.showCategoryProducts(parseInt(req.params.id));
+        res.json(category);
+    }
+    catch (err) {
+        res.json(err);
+    }
 };
 const categoriesRoutes = (app) => {
     app.get('/categories', index);

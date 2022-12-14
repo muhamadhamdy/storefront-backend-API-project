@@ -4,7 +4,7 @@ import {
     createJWT,
     verifyJWT
 } from '../../components/authenticateUser';
-import { authUser, user, Users } from '../models/userModel';
+import { user, Users } from '../models/userModel';
 
 const User = new Users();
 
